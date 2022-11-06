@@ -2,18 +2,20 @@ import { useState, useEffect, useRef } from "react";
 import Button from "./components/Button";
 import Game from "./utils/game";
 
+let run = false;
+
 export default function App() {
     const options = ['bg-red-700', 'bg-green-700', 'bg-sky-700', 'bg-amber-600']
     const backgroundRef = useRef();
     const [title, setTitle] = useState('Level 1');
-    const [isPlaying, setIsPlaying] = useState(true);
     
+    // Ensure app only runs once
+    if(!run) {
+        run = true;
+        return null
+    }
+
     let game = new Game(options, setTitle, backgroundRef);
-    useEffect(() => {
-        if(!isPlaying) {
-            // Game over event
-        }
-    }, [isPlaying])
 
     return <div 
         ref={backgroundRef} 
